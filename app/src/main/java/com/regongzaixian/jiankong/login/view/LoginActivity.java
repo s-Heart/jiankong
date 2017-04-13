@@ -59,10 +59,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         editName = (EditText) findViewById(R.id.edit_username);
         editPwd = (EditText) findViewById(R.id.edit_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        btnRegister = (Button) findViewById(R.id.btn_register);
-
         btnLogin.setOnClickListener(this);
-        btnRegister.setOnClickListener(this);
     }
 
     private void initData() {

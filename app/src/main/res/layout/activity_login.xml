@@ -95,30 +95,10 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/selector_login_login"
+            android:background="@drawable/selector_btn_login"
             android:text="登录"
             android:textColor="#ffffff"
             android:textSize="@dimen/y40" />
-    </RelativeLayout>
-
-    <!--register-->
-    <RelativeLayout
-
-        android:layout_width="@dimen/x638"
-        android:layout_height="@dimen/y102"
-        android:layout_below="@+id/rl_login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/y54">
-
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/selector_login_register"
-            android:text="注册新用户"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/y28" />
-
     </RelativeLayout>
 
 </RelativeLayout>

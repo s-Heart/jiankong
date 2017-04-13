@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.regongzaixian.jiankong.R;
@@ -24,10 +23,6 @@ import com.regongzaixian.jiankong.util.Preferences;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView mainPageTitle;
-    private RelativeLayout viewAddTest;
-    private RelativeLayout viewTestedMgr;
-    private RelativeLayout viewTest;
-    private RelativeLayout viewDataQuery;
     private BroadcastReceiver tokenInvalidReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -81,16 +76,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         setContentView(R.layout.activity_main);
         initToolbar();
-
-        viewAddTest = (RelativeLayout) findViewById(R.id.layout_view_add_test);
-        viewTestedMgr = (RelativeLayout) findViewById(R.id.layout_tested_mgr);
-        viewTest = (RelativeLayout) findViewById(R.id.layout_test);
-        viewDataQuery = (RelativeLayout) findViewById(R.id.layout_data_query);
-
-        viewAddTest.setOnClickListener(this);
-        viewTestedMgr.setOnClickListener(this);
-        viewTest.setOnClickListener(this);
-        viewDataQuery.setOnClickListener(this);
     }
 
     private void initToolbar() {

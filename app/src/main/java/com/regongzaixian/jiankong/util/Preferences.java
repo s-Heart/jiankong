@@ -16,7 +16,7 @@ import com.regongzaixian.jiankong.net.NetManager;
  */
 public class Preferences {
 
-    private static final String PREFERENCE_XUNJIAN = "xunjian";
+    private static final String PREFERENCE_JJANKONG = "jiankong";
     private static Preferences mInstance;
     private final Context mContext;
     private SharedPreferences mPrefs;
@@ -39,7 +39,7 @@ public class Preferences {
     }
 
     public void doLoadPrefs() {
-        mPrefs = mContext.getSharedPreferences(PREFERENCE_XUNJIAN,
+        mPrefs = mContext.getSharedPreferences(PREFERENCE_JJANKONG,
                 Activity.MODE_PRIVATE);
 
     }
@@ -47,7 +47,7 @@ public class Preferences {
 
     public void storeToken(String token) {
         if (mPrefs == null) {
-            mPrefs = mContext.getSharedPreferences(PREFERENCE_XUNJIAN, 0);
+            mPrefs = mContext.getSharedPreferences(PREFERENCE_JJANKONG, 0);
         }
         SharedPreferences.Editor prefEditor = mPrefs.edit();
         prefEditor.putString("token", token);
@@ -58,7 +58,7 @@ public class Preferences {
 
     public String getToken() {
         if (mPrefs == null) {
-            mPrefs = mContext.getSharedPreferences(PREFERENCE_XUNJIAN, 0);
+            mPrefs = mContext.getSharedPreferences(PREFERENCE_JJANKONG, 0);
         }
         return mPrefs.getString("token", "");
 
@@ -66,7 +66,7 @@ public class Preferences {
 
     public void storeEmail(String email) {
         if (mPrefs == null) {
-            mPrefs = mContext.getSharedPreferences(PREFERENCE_XUNJIAN, 0);
+            mPrefs = mContext.getSharedPreferences(PREFERENCE_JJANKONG, 0);
         }
         SharedPreferences.Editor prefEditor = mPrefs.edit();
         prefEditor.putString("email", email);
@@ -75,14 +75,14 @@ public class Preferences {
 
     public String getEmail() {
         if (mPrefs == null) {
-            mPrefs = mContext.getSharedPreferences(PREFERENCE_XUNJIAN, 0);
+            mPrefs = mContext.getSharedPreferences(PREFERENCE_JJANKONG, 0);
         }
         return mPrefs.getString("email", "");
     }
 
     public void storeBakEmail(String emailTo) {
         if (mPrefs == null) {
-            mPrefs = mContext.getSharedPreferences(PREFERENCE_XUNJIAN, 0);
+            mPrefs = mContext.getSharedPreferences(PREFERENCE_JJANKONG, 0);
         }
         SharedPreferences.Editor prefEditor = mPrefs.edit();
         prefEditor.putString("bakEmail", emailTo);
@@ -91,7 +91,7 @@ public class Preferences {
 
     public String getBakEmail() {
         if (mPrefs == null) {
-            mPrefs = mContext.getSharedPreferences(PREFERENCE_XUNJIAN, 0);
+            mPrefs = mContext.getSharedPreferences(PREFERENCE_JJANKONG, 0);
         }
         return mPrefs.getString("bakEmail", "");
     }
