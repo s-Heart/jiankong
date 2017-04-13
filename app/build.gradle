@@ -22,11 +22,13 @@ android {
 
     buildTypes {
         debug {
+//            fixme
             buildConfigField "String", "BASE_URL", "\"http://rgzx.lingshikeji.cn:1338/api/\""
             signingConfig signingConfigs.release
         }
 
         release {
+//            fixme
             buildConfigField "String", "BASE_URL", "\"http://rgzx.lingshikeji.cn:81/api/\""
             signingConfig signingConfigs.release
             minifyEnabled false

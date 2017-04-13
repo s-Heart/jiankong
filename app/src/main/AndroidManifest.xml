@@ -25,13 +25,14 @@
         android:theme="@style/AppTheme">
 
         <!-- 必选-->
+        <!--fixme-->
         <meta-data
             android:name="PGYER_APPID"
             android:value="9e887cf48c9f0556e85ccd54b767802a" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.lingshikeji.xjapp"
+            android:authorities="com.regongzaixian.jiankong"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -52,8 +53,6 @@
             android:name=".main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-
 
 
     </application>
