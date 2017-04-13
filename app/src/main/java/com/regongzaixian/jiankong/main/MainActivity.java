@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initToolbar();
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -93,8 +93,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        mainPageTitle = (TextView) toolbar.findViewById(R.id.toolbar_title_main_page);
-        mainPageTitle.setText("当前用户：" + Preferences.getInstance().getEmail());
+        mainPageTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mainPageTitle.setText("主页");
         mainPageTitle.setVisibility(View.VISIBLE);
 
         TextView logoutTv = (TextView) toolbar.findViewById(R.id.toolbar_right_menu);
