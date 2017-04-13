@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.regongzaixian.jiankong.base.XJApp;
+import com.regongzaixian.jiankong.base.JianKongApp;
 import com.regongzaixian.jiankong.net.NetManager;
 
 
@@ -30,7 +30,7 @@ public class Preferences {
     }
 
     public static Preferences getInstance() {
-        return getInstance(XJApp.getInstance());
+        return getInstance(JianKongApp.getInstance());
     }
 
     private Preferences(Context context) {

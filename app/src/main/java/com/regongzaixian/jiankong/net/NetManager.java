@@ -3,7 +3,7 @@ package com.regongzaixian.jiankong.net;
 import android.content.Intent;
 
 import com.regongzaixian.jiankong.BuildConfig;
-import com.regongzaixian.jiankong.base.XJApp;
+import com.regongzaixian.jiankong.base.JianKongApp;
 import com.regongzaixian.jiankong.util.Preferences;
 
 import org.json.JSONObject;
@@ -116,7 +116,7 @@ public class NetManager {
 
                     @Override
                     public void onError(Throwable throwable) {
-                        if (!NetWorkUtils.isConnectedByState(XJApp.getInstance())) {
+                        if (!NetWorkUtils.isConnectedByState(JianKongApp.getInstance())) {
                             subscriberCallBack.onError(new Exception("请检查网络连接"));
                             return;
                         }
@@ -124,7 +124,7 @@ public class NetManager {
                         int errorCode = ((HttpException) throwable).response().code();
                         if (errorCode == 403) {
                             subscriberCallBack.onError(new Exception("token失效,请重新登录"));
-                            XJApp.getInstance().sendBroadcast(new Intent("token_invalid"));
+                            JianKongApp.getInstance().sendBroadcast(new Intent("token_invalid"));
                             return;
                         }
 

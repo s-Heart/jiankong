@@ -43,7 +43,7 @@ android {
             def buildType = variant.buildType.name
 
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                def fileName = "xunjian" + "_v" + versionName + "_" + releaseTime + "_" + buildType + ".apk"
+                def fileName = "jiankong" + "_v" + versionName + "_" + releaseTime + "_" + buildType + ".apk"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }

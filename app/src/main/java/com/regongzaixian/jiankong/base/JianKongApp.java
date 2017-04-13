@@ -11,7 +11,7 @@ import com.pgyersdk.crash.PgyCrashManager;
  * Time: 下午3:38
  * Description:
  */
-public class XJApp extends Application {
+public class JianKongApp extends Application {
 
     private static Application mAppContext;
 

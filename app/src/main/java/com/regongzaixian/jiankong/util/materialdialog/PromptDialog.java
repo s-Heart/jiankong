@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-import com.lingshikeji.xjapp.R;
+import com.regongzaixian.jiankong.R;
 import com.regongzaixian.jiankong.util.DeviceUtil;
 
 import java.util.ArrayList;

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lingshikeji.xjapp.R;
+import com.regongzaixian.jiankong.R;
 import com.regongzaixian.jiankong.util.materialdialog.IPromptDilaog;
 import com.regongzaixian.jiankong.util.materialdialog.PromptDialog;
 

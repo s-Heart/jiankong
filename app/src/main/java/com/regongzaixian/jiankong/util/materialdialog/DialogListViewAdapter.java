@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.lingshikeji.xjapp.R;
+import com.regongzaixian.jiankong.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class DialogListViewAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.dialog_listview_item_layout, null);
+            view = LayoutInflater.from(mContext).inflate(R.layout.prompt_dialog_listview_item_layout, null);
             viewHolder.txt = (TextView) view.findViewById(R.id.storage_list_item_text);
             viewHolder.img = (ImageView) view.findViewById(R.id.storage_list_item_image);
             view.setTag(viewHolder);

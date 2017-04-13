@@ -17,7 +17,7 @@
 
 
     <application
-        android:name=".base.XJApp"
+        android:name=".base.JianKongApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -48,52 +48,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".register.view.RegisterActivity"
-            android:screenOrientation="portrait" />
-
         <activity
             android:name=".main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-        <!--新建查看测试-->
-        <activity
-            android:name=".view_add_test_plan.view.ViewTestPlanActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view_add_test_plan.view.AddTestPlanActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".view_add_test_plan.view.ViewTestPlanDetailActivity"
-            android:screenOrientation="portrait" />
 
 
-        <!--被测设备管理-->
-        <activity
-            android:name=".device_mgr.view.DeviceMgrActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".device_mgr.view.DeviceDetailActivity"
-            android:screenOrientation="portrait" />
-
-        <!--测试设备处理-->
-        <activity
-            android:name=".instrument_mgr.view.InstrumentMgrActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".instrument_mgr.view.InstrumentDetailActivity"
-            android:screenOrientation="portrait" />
-
-        <!--数据查询-->
-        <activity
-            android:name=".data_query.view.DataQueryActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".data_query.view.SearchActivity"
-            android:screenOrientation="portrait" />
 
     </application>
 

@@ -10,14 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.lingshikeji.xjapp.R;
+import com.regongzaixian.jiankong.R;
 import com.regongzaixian.jiankong.base.BaseActivity;
 import com.regongzaixian.jiankong.login.frame.ILoginPresenter;
 import com.regongzaixian.jiankong.login.frame.ILoginView;
 import com.regongzaixian.jiankong.login.presenter.LoginPresenterImpl;
 import com.regongzaixian.jiankong.main.MainActivity;
 import com.regongzaixian.jiankong.model.UserEntity;
-import com.regongzaixian.jiankong.register.view.RegisterActivity;
 import com.regongzaixian.jiankong.util.Preferences;
 import com.regongzaixian.jiankong.net.Utils;
 
@@ -138,10 +137,6 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
                 String userName = editName.getText().toString();
                 String pwd = editPwd.getText().toString();
                 iLoginPresenter.doLogin(userName, pwd);
-                break;
-            case R.id.btn_register:
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent, 0);
                 break;
         }
     }

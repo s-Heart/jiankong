@@ -10,14 +10,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.lingshikeji.xjapp.R;
+import com.regongzaixian.jiankong.R;
 import com.regongzaixian.jiankong.base.BaseActivity;
-import com.regongzaixian.jiankong.data_query.view.DataQueryActivity;
 import com.regongzaixian.jiankong.login.view.LoginActivity;
-import com.regongzaixian.jiankong.instrument_mgr.view.InstrumentMgrActivity;
-import com.regongzaixian.jiankong.device_mgr.view.DeviceMgrActivity;
 import com.regongzaixian.jiankong.util.Preferences;
-import com.regongzaixian.jiankong.view_add_test_plan.view.ViewTestPlanActivity;
 
 /**
  * Author: tony(110618445@qq.com)
@@ -121,25 +117,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.layout_view_add_test:
-                Intent intent = new Intent(this, ViewTestPlanActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.layout_tested_mgr:
-                intent = new Intent(this, DeviceMgrActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.layout_test:
-                intent = new Intent(this, InstrumentMgrActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.layout_data_query:
-                intent = new Intent(this, DataQueryActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
     }
 }
