@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.MainActivity"
+            android:name=".main.view.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

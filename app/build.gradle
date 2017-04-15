@@ -23,7 +23,7 @@ android {
     buildTypes {
         debug {
 //            fixme
-            buildConfigField "String", "BASE_URL", "\"http://rgzx.lingshikeji.cn:1338/api/\""
+            buildConfigField "String", "BASE_URL", "\"http://rgzx.lingshikeji.cn:1339/api/\""
             signingConfig signingConfigs.release
         }
 
@@ -58,7 +58,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
 
     /**控件库****************************************/
-    compile(name: 'library-release', ext: 'aar')//吸顶tableView库
+//    compile(name: 'library-release', ext: 'aar')//吸顶tableView库
 
     /**rxjava+retrofit******************************/
     compile 'io.reactivex:rxjava:x.y.z'

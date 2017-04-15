@@ -12,14 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar">
 
-        <TextView
-            android:id="@+id/textView1"
+        <ListView
+            android:id="@+id/lv_black_body"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="xxxxxx"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:divider="@null"></ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

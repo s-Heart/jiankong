@@ -1,5 +1,6 @@
-package com.regongzaixian.jiankong.main;
+package com.regongzaixian.jiankong.main.view;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,11 +9,18 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.regongzaixian.jiankong.R;
 import com.regongzaixian.jiankong.base.BaseActivity;
 import com.regongzaixian.jiankong.login.view.LoginActivity;
+import com.regongzaixian.jiankong.main.frame.IMainPresenter;
+import com.regongzaixian.jiankong.main.frame.IMainView;
+import com.regongzaixian.jiankong.main.presenter.MainPresenterImpl;
+import com.regongzaixian.jiankong.main.uihelper.BlackBodyAdapter;
+import com.regongzaixian.jiankong.model.UserEntity;
 import com.regongzaixian.jiankong.util.Preferences;
 
 /**
@@ -21,7 +29,7 @@ import com.regongzaixian.jiankong.util.Preferences;
  * Time: 下午3:36
  * Description:
  */
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements IMainView {
 
     private TextView mainPageTitle;
     private BroadcastReceiver tokenInvalidReceiver = new BroadcastReceiver() {
@@ -36,13 +44,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     };
     private SwipeRefreshLayout swipeRefreshLayout;
+    private IMainPresenter iMainPresenter;
+    private ListView lvBlackBody;
+    private BlackBodyAdapter lvBlackBodyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
         initView();
+        initData();
+        initPresenter();
         registerBroadcast();
+    }
+
+    private void initPresenter() {
+        iMainPresenter = new MainPresenterImpl();
+        iMainPresenter.attachView(this);
+        iMainPresenter.doQuery();
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -81,12 +100,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //dosomething
-            }
-        });
+        lvBlackBody = (ListView) findViewById(R.id.lv_black_body);
+        lvBlackBodyAdapter = new BlackBodyAdapter(this);
     }
 
     private void initToolbar() {
@@ -109,9 +124,42 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initData() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                iMainPresenter.doQuery();
+            }
+        });
+    }
+
+
+    @Override
+    public void toast(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onClick(View view) {
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void querySuccess() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 }

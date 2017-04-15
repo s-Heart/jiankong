@@ -15,7 +15,7 @@ import com.regongzaixian.jiankong.base.BaseActivity;
 import com.regongzaixian.jiankong.login.frame.ILoginPresenter;
 import com.regongzaixian.jiankong.login.frame.ILoginView;
 import com.regongzaixian.jiankong.login.presenter.LoginPresenterImpl;
-import com.regongzaixian.jiankong.main.MainActivity;
+import com.regongzaixian.jiankong.main.view.MainActivity;
 import com.regongzaixian.jiankong.model.UserEntity;
 import com.regongzaixian.jiankong.util.Preferences;
 import com.regongzaixian.jiankong.net.Utils;
