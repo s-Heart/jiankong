@@ -116,7 +116,7 @@
                     android:textSize="@dimen/y28" />
 
                 <TextView
-                    android:id="@+id/tv_instrument_serial"
+                    android:id="@+id/tv_instrument_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -259,7 +259,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y500">
+                android:layout_height="@dimen/y700">
 
                 <TextView
                     android:id="@+id/tv_no_data"

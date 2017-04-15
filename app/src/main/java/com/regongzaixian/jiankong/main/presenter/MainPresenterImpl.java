@@ -5,8 +5,6 @@ import com.regongzaixian.jiankong.main.frame.IMainView;
 import com.regongzaixian.jiankong.model.InstrumentEntity;
 import com.regongzaixian.jiankong.net.NetManager;
 
-import android.os.Handler;
-
 import java.util.List;
 
 import rx.Observable;

@@ -25,6 +25,10 @@ public class InstrumentEntity implements Serializable {
      * id : 1
      * createdAt : 2017-04-14T13:03:41.000Z
      * updatedAt : 2017-04-14T13:05:57.000Z
+     * temperaturerangemin : 10
+     * temperaturerangemax : 300
+     * humidityrangemin : 20
+     * humidityrangemax : 100
      */
 
     private String name;
@@ -42,6 +46,10 @@ public class InstrumentEntity implements Serializable {
     private int id;
     private String createdAt;
     private String updatedAt;
+    private String temperaturerangemin;
+    private String temperaturerangemax;
+    private String humidityrangemin;
+    private String humidityrangemax;
 
     public String getName() {
         return name;
@@ -161,5 +169,37 @@ public class InstrumentEntity implements Serializable {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getTemperaturerangemin() {
+        return temperaturerangemin;
+    }
+
+    public void setTemperaturerangemin(String temperaturerangemin) {
+        this.temperaturerangemin = temperaturerangemin;
+    }
+
+    public String getTemperaturerangemax() {
+        return temperaturerangemax;
+    }
+
+    public void setTemperaturerangemax(String temperaturerangemax) {
+        this.temperaturerangemax = temperaturerangemax;
+    }
+
+    public String getHumidityrangemin() {
+        return humidityrangemin;
+    }
+
+    public void setHumidityrangemin(String humidityrangemin) {
+        this.humidityrangemin = humidityrangemin;
+    }
+
+    public String getHumidityrangemax() {
+        return humidityrangemax;
+    }
+
+    public void setHumidityrangemax(String humidityrangemax) {
+        this.humidityrangemax = humidityrangemax;
     }
 }

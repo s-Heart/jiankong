@@ -25,7 +25,7 @@ public class InstrumentDetailActivity extends BaseActivity {
     private TextView tvInstrumentName;
     private Button btnSet;
     private TextView tvInstrumentModel;
-    private TextView tvInstrumentSerial;
+    private TextView tvInstrumentId;
     private TextView tvTempRange;
     private TextView tvHumRange;
     private TextView tvKongwenModel;
@@ -79,7 +79,7 @@ public class InstrumentDetailActivity extends BaseActivity {
                 hideLoadingDialog();
                 tvInstrumentName.setText(instrumentEntity.getName());
                 tvInstrumentModel.setText(instrumentEntity.getModel());
-                tvInstrumentSerial.setText(instrumentEntity.getSerialnumber());
+                tvInstrumentId.setText("" + instrumentEntity.getId());
                 tvTempRange.setText(instrumentEntity.getTemperaturerange());
                 tvHumRange.setText(instrumentEntity.getHumidityrange());
                 tvKongwenModel.setText(instrumentEntity.getTemperatureindicator());
@@ -94,7 +94,7 @@ public class InstrumentDetailActivity extends BaseActivity {
 
         tvInstrumentName = (TextView) findViewById(R.id.tv_instrument_name);
         tvInstrumentModel = (TextView) findViewById(R.id.tv_instrument_model);
-        tvInstrumentSerial = (TextView) findViewById(R.id.tv_instrument_serial);
+        tvInstrumentId = (TextView) findViewById(R.id.tv_instrument_id);
         tvTempRange = (TextView) findViewById(R.id.tv_temp_range);
         tvHumRange = (TextView) findViewById(R.id.tv_hum_range);
         tvKongwenModel = (TextView) findViewById(R.id.tv_kongwen_model);
