@@ -2,8 +2,15 @@ package com.regongzaixian.jiankong.main.presenter;
 
 import com.regongzaixian.jiankong.main.frame.IMainPresenter;
 import com.regongzaixian.jiankong.main.frame.IMainView;
+import com.regongzaixian.jiankong.model.InstrumentEntity;
+import com.regongzaixian.jiankong.net.NetManager;
 
 import android.os.Handler;
+
+import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Author: tony(110618445@qq.com)
@@ -25,13 +32,23 @@ public class MainPresenterImpl extends IMainPresenter {
 
     @Override
     public void doQuery() {
-        new Handler().postDelayed(new Runnable() {
+        Observable<List<InstrumentEntity>> observable = NetManager.getInstance().getApiService().queryInstruments();
+        NetManager.getInstance().runRxJava(observable, new Subscriber<List<InstrumentEntity>>() {
             @Override
-            public void run() {
-                getiView().toast("刷新完成");
-                getiView().querySuccess();
-            }
-        }, 3000);
+            public void onCompleted() {
 
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                getiView().toast(e.getMessage());
+                getiView().queryFail();
+            }
+
+            @Override
+            public void onNext(List<InstrumentEntity> instrumentEntities) {
+                getiView().querySuccess(instrumentEntities);
+            }
+        });
     }
 }

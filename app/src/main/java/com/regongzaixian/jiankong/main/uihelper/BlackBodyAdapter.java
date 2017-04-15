@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.regongzaixian.jiankong.R;
-import com.regongzaixian.jiankong.main.view.MainActivity;
+import com.regongzaixian.jiankong.model.InstrumentEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BlackBodyAdapter extends BaseAdapter {
     private final Context context;
-    private List<Object> data = new ArrayList<>();
+    private List<InstrumentEntity> data = new ArrayList<>();
 
     public BlackBodyAdapter(Context context) {
         this.context = context;
@@ -37,7 +37,7 @@ public class BlackBodyAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return data.get(position).getId();
     }
 
     @Override
@@ -47,23 +47,29 @@ public class BlackBodyAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_black_body, null);
             viewHolder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            viewHolder.tvSign = (TextView) convertView.findViewById(R.id.tv_sign);
-            viewHolder.tvNum = (TextView) convertView.findViewById(R.id.tv_number);
+            viewHolder.tvModel = (TextView) convertView.findViewById(R.id.tv_model);
+            viewHolder.tvId = (TextView) convertView.findViewById(R.id.tv_id);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-//        viewHolder.tvName.setText(data.get(position).toString());
-//        viewHolder.tvSign.setText("设备信号：" + data.get(position).toString());
-//        viewHolder.tvNum.setText("设备数量：" + data.get(position).toString());
+        viewHolder.tvName.setText(data.get(position).getName());
+        viewHolder.tvModel.setText("设备型号：" + data.get(position).getModel());
+        viewHolder.tvId.setText("设备编号：" + data.get(position).getId());
 
         return convertView;
     }
 
+    public void setData(List<InstrumentEntity> instrumentEntities) {
+        this.data.clear();
+        this.data.addAll(instrumentEntities);
+        notifyDataSetChanged();
+    }
+
     private class ViewHolder {
         public TextView tvName;
-        public TextView tvSign;
-        public TextView tvNum;
+        public TextView tvModel;
+        public TextView tvId;
     }
 }

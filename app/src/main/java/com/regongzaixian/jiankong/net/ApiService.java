@@ -1,11 +1,15 @@
 package com.regongzaixian.jiankong.net;
 
+import com.regongzaixian.jiankong.model.InstrumentEntity;
 import com.regongzaixian.jiankong.model.UserEntity;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -19,5 +23,20 @@ public interface ApiService {
 
     @POST("auth/local")
     Observable<UserEntity> login(@Body Map<String, String> params);
+
+    /**
+     * 设备列表 GET instrument
+     *
+     * @return
+     */
+    @GET("instrument")
+    Observable<List<InstrumentEntity>> queryInstruments();
+
+    /**
+     * 单个设备GET instrument/{id}
+     */
+    @GET("instrument/{id}")
+    Observable<InstrumentEntity> queryInstrumentById(@Path("id") int instrumentId);
+
 
 }

@@ -1,6 +1,9 @@
 package com.regongzaixian.jiankong.main.frame;
 
+import com.regongzaixian.jiankong.model.InstrumentEntity;
 import com.regongzaixian.jiankong.mvp.BaseView;
+
+import java.util.List;
 
 /**
  * Author: tony(110618445@qq.com)
@@ -9,5 +12,7 @@ import com.regongzaixian.jiankong.mvp.BaseView;
  * Description:
  */
 public interface IMainView extends BaseView {
-    void querySuccess();
+    void querySuccess(List<InstrumentEntity> instrumentEntities);
+
+    void queryFail();
 }

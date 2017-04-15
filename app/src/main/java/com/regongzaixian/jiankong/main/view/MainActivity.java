@@ -9,19 +9,23 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.regongzaixian.jiankong.R;
 import com.regongzaixian.jiankong.base.BaseActivity;
+import com.regongzaixian.jiankong.instrument.InstrumentDetailActivity;
 import com.regongzaixian.jiankong.login.view.LoginActivity;
 import com.regongzaixian.jiankong.main.frame.IMainPresenter;
 import com.regongzaixian.jiankong.main.frame.IMainView;
 import com.regongzaixian.jiankong.main.presenter.MainPresenterImpl;
 import com.regongzaixian.jiankong.main.uihelper.BlackBodyAdapter;
-import com.regongzaixian.jiankong.model.UserEntity;
+import com.regongzaixian.jiankong.model.InstrumentEntity;
 import com.regongzaixian.jiankong.util.Preferences;
+
+import java.util.List;
 
 /**
  * Author: tony(110618445@qq.com)
@@ -102,6 +106,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
         lvBlackBody = (ListView) findViewById(R.id.lv_black_body);
         lvBlackBodyAdapter = new BlackBodyAdapter(this);
+        lvBlackBody.setAdapter(lvBlackBodyAdapter);
     }
 
     private void initToolbar() {
@@ -130,6 +135,15 @@ public class MainActivity extends BaseActivity implements IMainView {
                 iMainPresenter.doQuery();
             }
         });
+
+        lvBlackBody.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, InstrumentDetailActivity.class);
+                intent.putExtra("instrumentId", id);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -149,7 +163,16 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     @Override
-    public void querySuccess() {
+    public void querySuccess(List<InstrumentEntity> instrumentEntities) {
+        swipeRefreshLayout.setRefreshing(false);
+        if (instrumentEntities != null && instrumentEntities.size() > 0) {
+            lvBlackBodyAdapter.setData(instrumentEntities);
+        }
+
+    }
+
+    @Override
+    public void queryFail() {
         swipeRefreshLayout.setRefreshing(false);
     }
 

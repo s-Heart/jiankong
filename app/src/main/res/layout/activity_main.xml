@@ -16,6 +16,6 @@
             android:id="@+id/lv_black_body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@null"></ListView>
+            android:divider="@null" />
     </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>
