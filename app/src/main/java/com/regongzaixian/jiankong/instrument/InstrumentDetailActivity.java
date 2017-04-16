@@ -1,5 +1,6 @@
 package com.regongzaixian.jiankong.instrument;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.os.Bundle;
@@ -27,10 +28,13 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.regongzaixian.jiankong.R;
 import com.regongzaixian.jiankong.base.BaseActivity;
+import com.regongzaixian.jiankong.model.InstrumentDataEntity;
 import com.regongzaixian.jiankong.model.InstrumentEntity;
 import com.regongzaixian.jiankong.net.NetManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -40,6 +44,7 @@ import rx.Subscriber;
  */
 
 public class InstrumentDetailActivity extends BaseActivity implements OnChartValueSelectedListener {
+    public static final int SETTING_OK = 0;
     private int instrmentId;
     private TextView tvInstrumentName;
     private Button btnSet;
@@ -62,6 +67,14 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
         initPresenter();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SETTING_OK) {
+            queryInstrumentById(instrmentId);
+        }
+    }
+
     private void initPresenter() {
         queryInstrumentById(instrmentId);
     }
@@ -82,9 +95,20 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
         btnSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toast("设定参数");
+                onClickSet();
+
             }
         });
+    }
+
+    private void onClickSet() {
+        Intent intent = new Intent(this, SettingActivity.class);
+        intent.putExtra("tempMax", instrumentEntitys.getTemperaturerangemax());
+        intent.putExtra("tempMin", instrumentEntitys.getTemperaturerangemin());
+        intent.putExtra("humMax", instrumentEntitys.getHumidityrangemax());
+        intent.putExtra("humMin", instrumentEntitys.getHumidityrangemin());
+        intent.putExtra("instrumentId", instrmentId);
+        startActivityForResult(intent, 2);
     }
 
     private void toast(String str) {
@@ -95,7 +119,6 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
         showLoadingDialog();
         Observable<InstrumentEntity> observable = NetManager.getInstance().getApiService().queryInstrumentById(instrmentId);
         NetManager.getInstance().runRxJava(observable, new Subscriber<InstrumentEntity>() {
-
 
             @Override
             public void onCompleted() {
@@ -125,8 +148,25 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
     }
 
     private void refreshChart() {
-        // TODO: 2017/4/15 queryData
-        setData(20, 30);
+        Map<String, String> params = new HashMap<>();
+        params.put("where", "{\"instrument\":" + "\"" + instrmentId + "\"" + "}");
+        Observable<InstrumentDataEntity> observable = NetManager.getInstance().getApiService().queryInstrumentData(params);
+        NetManager.getInstance().runRxJava(observable, new Subscriber<InstrumentDataEntity>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                toast(e.getMessage());
+            }
+
+            @Override
+            public void onNext(InstrumentDataEntity data) {
+                setData(data.getTime().size(), data);
+            }
+        });
     }
 
     private void initView() {
@@ -213,7 +253,7 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
         rightAxis.setGranularityEnabled(false);
     }
 
-    private void setData(int count, float range) {
+    private void setData(int count, final InstrumentDataEntity dataEntity) {
         //refresh x
         XAxis xAxis = mChart.getXAxis();
         xAxis.setAxisMinimum(0f);
@@ -221,8 +261,11 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                Log.d("refresh x label", "-----");
-                return "datas.getCreatedAt().get(value)";
+                if (value == 0) {
+                    return dataEntity.getTime().get(0);
+                } else {
+                    return dataEntity.getTime().get((int) (value - 1));
+                }
             }
         });
         //refresh y
@@ -238,37 +281,21 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
         }
 
 
-        // FIXME: 2017/4/15 封装数据
         ArrayList<Entry> yVals1 = new ArrayList<>();
-
         for (int i = 0; i < count; i++) {
-            float mult = range / 2f;
-            float val = (float) (Math.random() * mult) + 50;
-            yVals1.add(new Entry(i, val));
+            yVals1.add(new Entry(i, dataEntity.getTempPV().get(i)));
         }
-
         ArrayList<Entry> yVals2 = new ArrayList<>();
-
         for (int i = 0; i < count; i++) {
-            float mult = range / 2f;
-            float val = (float) (Math.random() * mult) + 60;
-            yVals2.add(new Entry(i, val));
+            yVals2.add(new Entry(i, dataEntity.getTempSV().get(i)));
         }
-
         ArrayList<Entry> yVals3 = new ArrayList<>();
-
-        for (int i = 0; i < count - 1; i++) {
-            float mult = range;
-            float val = (float) (Math.random() * mult) + 70;
-            yVals3.add(new Entry(i, val));
-        }
-
-        ArrayList<Entry> yVals4 = new ArrayList<>();
-
         for (int i = 0; i < count; i++) {
-            float mult = range;
-            float val = (float) (Math.random() * mult) + 80;
-            yVals4.add(new Entry(i, val));
+            yVals3.add(new Entry(i, dataEntity.getHumPV().get(i)));
+        }
+        ArrayList<Entry> yVals4 = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            yVals4.add(new Entry(i, dataEntity.getHumSV().get(i)));
         }
 
         LineDataSet set1, set2, set3, set4;
@@ -283,8 +310,6 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
             set2.setValues(yVals2);
             set3.setValues(yVals3);
             set4.setValues(yVals4);
-
-
             mChart.getData().notifyDataChanged();
             mChart.notifyDataSetChanged();
         } else {
@@ -352,7 +377,6 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
             mChart.setData(data);
         }
     }
-
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {

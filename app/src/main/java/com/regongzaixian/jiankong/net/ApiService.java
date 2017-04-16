@@ -1,5 +1,6 @@
 package com.regongzaixian.jiankong.net;
 
+import com.regongzaixian.jiankong.model.InstrumentDataEntity;
 import com.regongzaixian.jiankong.model.InstrumentEntity;
 import com.regongzaixian.jiankong.model.UserEntity;
 
@@ -10,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -38,5 +40,18 @@ public interface ApiService {
     @GET("instrument/{id}")
     Observable<InstrumentEntity> queryInstrumentById(@Path("id") int instrumentId);
 
+    /**
+     * @param params where={“instrument”:”<设备ID>”}
+     * @return
+     */
+    @GET("instrumentdata")
+    Observable<InstrumentDataEntity> queryInstrumentData(@QueryMap Map<String, String> params);
 
+    /**
+     * 设定参数
+     *
+     * @return
+     */
+    @POST("")
+    Observable<Object> modifySettings(@Body Map<String, String> params);
 }

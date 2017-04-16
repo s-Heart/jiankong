@@ -283,11 +283,11 @@
 
                 <Button
                     android:id="@+id/btn_set"
-                    android:layout_width="@dimen/x330"
+                    android:layout_width="@dimen/x500"
                     android:layout_height="@dimen/y80"
                     android:layout_marginRight="@dimen/x30"
                     android:background="@drawable/selector_btn_modify"
-                    android:text="设定"
+                    android:text="设定参数"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>

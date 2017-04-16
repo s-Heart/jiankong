@@ -28,7 +28,7 @@
         <!--fixme-->
         <meta-data
             android:name="PGYER_APPID"
-            android:value="9e887cf48c9f0556e85ccd54b767802a" />
+            android:value="23bcc009fbbf4963fe0d4a3022d71467" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -55,6 +55,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".instrument.InstrumentDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".instrument.SettingActivity"
             android:screenOrientation="portrait" />
 
     </application>
