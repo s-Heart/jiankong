@@ -204,6 +204,68 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x20"
+                    android:text="设定温度"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/y28" />
+
+                <TextView
+                    android:id="@+id/tv_temp_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x20"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/y28" />
+
+                <ImageView
+                    android:layout_width="@dimen/x724"
+                    android:layout_height="@dimen/x1"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="@color/gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y84">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:text="设定湿度"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/y28" />
+
+                <TextView
+                    android:id="@+id/tv_hum_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x20"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/y28" />
+
+                <ImageView
+                    android:layout_width="@dimen/x724"
+                    android:layout_height="@dimen/x1"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="@color/gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y84">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x20"
                     android:text="控温表型号"
                     android:textColor="@color/black"
                     android:textSize="@dimen/y28" />

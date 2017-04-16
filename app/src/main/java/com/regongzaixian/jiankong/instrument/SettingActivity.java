@@ -33,6 +33,8 @@ public class SettingActivity extends BaseActivity {
     private EditText edHum;
     private Button btnSubmit;
     private int instrumentId;
+    private float temp;
+    private float hum;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,8 +103,9 @@ public class SettingActivity extends BaseActivity {
     private void doSubmit() {
         showLoadingDialog();
         Map<String, String> params = new HashMap<>();
-        params.put("", "");
-        Observable<Object> observable = NetManager.getInstance().getApiService().modifySettings(params);
+        params.put("meantemperature", "" + temp);
+        params.put("meanhumidity", "" + hum);
+        Observable<Object> observable = NetManager.getInstance().getApiService().modifySettings(instrumentId, params);
         NetManager.getInstance().runRxJava(observable, new Subscriber<Object>() {
             @Override
             public void onCompleted() {
@@ -134,8 +137,8 @@ public class SettingActivity extends BaseActivity {
             return false;
         }
 
-        float temp = Float.parseFloat(edTemp.getText().toString());
-        float hum = Float.parseFloat(edHum.getText().toString());
+        temp = Float.parseFloat(edTemp.getText().toString());
+        hum = Float.parseFloat(edHum.getText().toString());
         if (temp > tempMaxf || temp < tempMinf) {
             toast("请确定温度设定范围在" + tempMinf + "-" + tempMaxf + "之间");
             return false;

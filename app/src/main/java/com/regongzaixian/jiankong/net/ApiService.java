@@ -10,6 +10,7 @@ import java.util.Map;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -49,9 +50,10 @@ public interface ApiService {
 
     /**
      * 设定参数
+     * PUT /
      *
      * @return
      */
-    @POST("")
-    Observable<Object> modifySettings(@Body Map<String, String> params);
+    @PUT("instrumentset/{id}")
+    Observable<Object> modifySettings(@Path("id") int instrumentId, @Body Map<String, String> params);
 }

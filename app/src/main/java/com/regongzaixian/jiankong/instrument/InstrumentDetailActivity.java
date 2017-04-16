@@ -57,6 +57,8 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
     InstrumentEntity instrumentEntitys;
     private LineChart mChart;
     private ScrollView scrollView;
+    private TextView tvTempMain;
+    private TextView tvHumMain;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SETTING_OK) {
+        if (resultCode == SETTING_OK) {
             queryInstrumentById(instrmentId);
         }
     }
@@ -142,6 +144,8 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
                 tvHumRange.setText(instrumentEntity.getHumidityrange());
                 tvKongwenModel.setText(instrumentEntity.getTemperatureindicator());
                 tvInstrumentStatus.setText("" + instrumentEntity.getStatus());
+                tvTempMain.setText("" + instrumentEntity.getMeantemperature());
+                tvHumMain.setText("" + instrumentEntity.getMeanhumidity());
                 refreshChart();
             }
         });
@@ -180,6 +184,8 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
         tvInstrumentId = (TextView) findViewById(R.id.tv_instrument_id);
         tvTempRange = (TextView) findViewById(R.id.tv_temp_range);
         tvHumRange = (TextView) findViewById(R.id.tv_hum_range);
+        tvTempMain = (TextView) findViewById(R.id.tv_temp_main);
+        tvHumMain = (TextView) findViewById(R.id.tv_hum_main);
         tvKongwenModel = (TextView) findViewById(R.id.tv_kongwen_model);
         tvInstrumentStatus = (TextView) findViewById(R.id.tv_instrument_status);
         btnSet = (Button) findViewById(R.id.btn_set);
@@ -380,8 +386,6 @@ public class InstrumentDetailActivity extends BaseActivity implements OnChartVal
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
-        Log.i("Entry selected", e.toString());
-
         mChart.centerViewToAnimated(e.getX(), e.getY(), mChart.getData().getDataSetByIndex(h.getDataSetIndex())
                 .getAxisDependency(), 500);
     }

@@ -25,7 +25,6 @@
         android:theme="@style/AppTheme">
 
         <!-- 必选-->
-        <!--fixme-->
         <meta-data
             android:name="PGYER_APPID"
             android:value="23bcc009fbbf4963fe0d4a3022d71467" />
