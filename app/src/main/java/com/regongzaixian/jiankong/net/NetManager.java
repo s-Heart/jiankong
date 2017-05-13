@@ -65,8 +65,8 @@ public class NetManager {
 
     private void initRetrofit() {
         this.okHttpClient = (new OkHttpClient.Builder())
-                .readTimeout(30000L, TimeUnit.SECONDS)
-                .connectTimeout(30000L, TimeUnit.SECONDS)
+                .readTimeout(30L, TimeUnit.SECONDS)
+                .connectTimeout(30L, TimeUnit.SECONDS)
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -122,7 +122,7 @@ public class NetManager {
                         }
                         //token失效处理
                         int errorCode = ((HttpException) throwable).response().code();
-                        if (errorCode == 403) {
+                        if (errorCode == 401) {
                             subscriberCallBack.onError(new Exception("token失效,请重新登录"));
                             JianKongApp.getInstance().sendBroadcast(new Intent("token_invalid"));
                             return;
