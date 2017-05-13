@@ -22,12 +22,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", "\"http://rgzx.lingshikeji.cn:1339/api/\""
+            buildConfigField "String", "BASE_URL", "\"http://xunjian.regongzaixian.com:1339/api/\""
             signingConfig signingConfigs.release
         }
 
         release {
-            buildConfigField "String", "BASE_URL", "\"http://rgzx.lingshikeji.cn:81/api/\""
+            buildConfigField "String", "BASE_URL", "\"http://xunjian.regongzaixian.com:1339/api/\""
             signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
