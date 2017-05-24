@@ -9,6 +9,8 @@ import com.regongzaixian.jiankong.util.Preferences;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -70,20 +72,13 @@ public class NetManager {
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
-                        try {
-                            Request response1 = chain.request().newBuilder().headers(Headers.of(headerMap)).build();
-                            return chain.proceed(response1);
-                        } catch (Exception var5) {
-                            Response response;
-                            try {
-                                response = chain.proceed(chain.request());
-                            } catch (Exception var4) {
-                                var4.printStackTrace();
-                                response = (new Response.Builder()).request(chain.request()).protocol(Protocol.HTTP_1_1).code(1).build();
-                            }
-
-                            return response;
-                        }
+                        //给请求统一加头的拦截器
+                        Request request = chain
+                                .request()
+                                .newBuilder()
+                                .headers(Headers.of(headerMap))
+                                .build();
+                        return chain.proceed(request);
                     }
                 }).build();
 
@@ -107,6 +102,12 @@ public class NetManager {
     }
 
     public <M> void runRxJava(Observable<M> observable, final Subscriber<M> subscriberCallBack) {
+        //网络不可用，直接return
+        if (!NetWorkUtils.isConnectedByState(JianKongApp.getInstance())) {
+            subscriberCallBack.onError(new Exception("请检查网络连接"));
+            return;
+        }
+
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<M>() {
@@ -116,11 +117,31 @@ public class NetManager {
 
                     @Override
                     public void onError(Throwable throwable) {
-                        if (!NetWorkUtils.isConnectedByState(JianKongApp.getInstance())) {
-                            subscriberCallBack.onError(new Exception("请检查网络连接"));
+                        //  the base class of
+                        //  ConnectException/NoRouteToHostException/
+                        //  is SocketException
+                        if (throwable instanceof SocketException) {
+                            subscriberCallBack.onError(new Exception("网络连接异常,请检查网络连接"));
                             return;
                         }
-                        //token失效处理
+                        //  the base class of
+                        //  SocketTimeoutException
+                        //  is InterruptedIOException
+                        if (throwable instanceof InterruptedIOException) {
+                            subscriberCallBack.onError(new Exception("网络请求超时,请稍后重试"));
+                            return;
+                        }
+                        //  上面的实例，基类都属于IOException，所以放到最后处理
+                        //  the base class of
+                        //  UnknownHostException/UnknownServiceException.....
+                        //  is IOException
+                        if (throwable instanceof IOException) {
+                            subscriberCallBack.onError(new Exception("网络异常,请检查网络连接"));
+                            return;
+                        }
+
+                        //  其他情况都是HttpException
+                        //  token失效处理
                         int errorCode = ((HttpException) throwable).response().code();
                         if (errorCode == 401) {
                             subscriberCallBack.onError(new Exception("token失效,请重新登录"));
@@ -137,7 +158,6 @@ public class NetManager {
                             subscriberCallBack.onError(new Exception("unKnown error"));
                             e1.printStackTrace();
                         }
-
                     }
 
                     @Override
